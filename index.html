@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USBT — Digital Infrastructure | Boymatov Bakhtiyor</title>
+    <!-- GeckoTerminal widget -->
+    <script type="text/javascript" src="https://www.geckoterminal.com/solana/pools/DPQwaQDTBuWFEFWXCndC7YhBp6YownLmK1wTLAdB6oxi/widget?type=price_chart"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            background: #CE1126; /* UAE Red base */
+            color: #FFFFFF;
+            line-height: 1.5;
+        }
+
+        /* UAE flag colors overlay */
+        .flag-stripes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            display: flex;
+            z-index: 1001;
+        }
+        .stripe-red { flex: 1; background: #CE1126; }
+        .stripe-green { flex: 1; background: #007A3D; }
+        .stripe-white { flex: 1; background: #FFFFFF; }
+        .stripe-black { flex: 1; background: #000000; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
+            border-radius: 32px;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        h1 { font-size: 2.8rem; margin-bottom: 0.5rem; font-weight: 700; letter-spacing: -0.5px; background: linear-gradient(135deg, #FFFFFF, #CE1126, #007A3D); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 2px 4px rgba(0,0,0,0.2);}
+        h2 { font-size: 1.8rem; margin: 2rem 0 1rem; border-left: 6px solid #CE1126; padding-left: 1rem; color: #FFE8C5; }
+        h3 { font-size: 1.3rem; margin: 1.2rem 0 0.5rem; color: #FFFFFF; }
+        .subhead { color: #AAAAAA; margin-bottom: 2rem; border-bottom: 1px solid #CE1126; padding-bottom: 1rem; font-size: 1.1rem; }
+
+        .grid-2col { display: flex; gap: 2rem; flex-wrap: wrap; margin: 1.5rem 0; }
+        .card { background: rgba(255,255,255,0.1); border-radius: 24px; padding: 1.5rem; flex: 1; min-width: 200px; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.2); transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.15); }
+
+        .price-large { font-size: 2.2rem; font-weight: 800; color: #FFD966; }
+        .liquidity { font-size: 1.4rem; font-weight: 600; }
+
+        .button-group { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0; }
+        .btn { display: inline-block; background: #007A3D; color: white; padding: 0.75rem 1.5rem; border-radius: 60px; text-decoration: none; font-weight: 600; transition: all 0.2s; border: none; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
+        .btn:hover { background: #CE1126; transform: scale(1.02); }
+        .btn-outline { background: transparent; border: 2px solid #FFFFFF; }
+        .btn-outline:hover { background: white; color: #CE1126; }
+
+        .disclaimer { background: rgba(0,0,0,0.6); padding: 1rem; border-radius: 16px; margin: 1.5rem 0; font-size: 0.75rem; border-left: 3px solid #CE1126; }
+
+        .lang-switcher { position: fixed; bottom: 20px; right: 20px; background: #000000; color: white; padding: 10px 20px; border-radius: 60px; cursor: pointer; z-index: 1000; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.3); border: 1px solid #CE1126; }
+        .lang-menu { position: fixed; bottom: 80px; right: 20px; background: #1A1A1A; border-radius: 20px; padding: 10px 0; display: none; flex-direction: column; z-index: 1000; box-shadow: 0 8px 20px rgba(0,0,0,0.4); min-width: 150px; backdrop-filter: blur(10px); border: 1px solid #007A3D; }
+        .lang-menu a { padding: 10px 24px; text-decoration: none; color: #FFF; font-size: 0.9rem; transition: 0.1s; }
+        .lang-menu a:hover { background: #CE1126; }
+        .lang-menu.show { display: flex; }
+
+        footer { text-align: center; margin-top: 2rem; font-size: 0.7rem; opacity: 0.7; }
+
+        @media (max-width: 700px) {
+            .container { padding: 1rem; }
+            h1 { font-size: 2rem; }
+        }
+        .gecko-widget { margin: 1rem 0; border-radius: 20px; overflow: hidden; }
+    </style>
+</head>
+<body>
+<div class="flag-stripes">
+    <div class="stripe-red"></div><div class="stripe-green"></div><div class="stripe-white"></div><div class="stripe-black"></div>
+</div>
+
+<div class="container" id="appContainer">
+    <h1>USBT — Digital Bridge</h1>
+    <div class="subhead" id="subhead">Utility token · Powered by Boymatov Bakhtiyor | 18+ markets</div>
+
+    <div class="grid-2col">
+        <div class="card">
+            <div id="priceText" class="price-large">$1.0005</div>
+            <div id="priceHint">1 USBT ≈ 1 USDT</div>
+            <div id="liquidityText" class="liquidity">💧 Liquidity: $296.3M</div>
+            <div>📊 24h Volume: $0 | 🔒 Fixed supply: 10B</div>
+        </div>
+        <div class="card">
+            <div id="missionShort">🌍 <strong id="missionTitle">Mission</strong><br><span id="missionDesc">Digital infrastructure for businesses across 18 countries — from Central Asia to Europe & Turkey.</span></div>
+            <div class="button-group" style="margin-top: 1rem;">
+                <a href="https://jup.ag/swap/USDT-USBT" target="_blank" class="btn">🪐 Swap on Jupiter</a>
+                <a href="https://www.binance.com/en/price/solana" target="_blank" class="btn btn-outline">📈 Binance (SOL)</a>
+                <a href="https://raydium.io/swap/" target="_blank" class="btn btn-outline">💧 Raydium</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- GeckoTerminal chart -->
+    <div class="gecko-widget">
+        <geckoterminal-widget 
+            src="https://www.geckoterminal.com/solana/pools/DPQwaQDTBuWFEFWXCndC7YhBp6YownLmK1wTLAdB6oxi?embed=1&info=0&swaps=0"
+            width="100%" 
+            height="450">
+        </geckoterminal-widget>
+    </div>
+
+    <div id="whitepaperContent">
+        <!-- dynamic WP -->
+    </div>
+    <footer>© 2025 USBT Ecosystem — Boymatov Bakhtiyor</footer>
+</div>
+
+<div class="lang-switcher" id="langSwitcher">🌐 EN</div>
+<div class="lang-menu" id="langMenu">
+    <a href="#" data-lang="en">🇬🇧 English</a>
+    <a href="#" data-lang="ru">🇷🇺 Русский</a>
+    <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+    <a href="#" data-lang="mn">🇲🇳 Монгол</a>
+    <a href="#" data-lang="sk">🇸🇰 Slovenčina</a>
+    <a href="#" data-lang="kk">🇰🇿 Қазақша</a>
+    <a href="#" data-lang="uz">🇺🇿 O'zbekcha</a>
+    <a href="#" data-lang="ar">🇦🇪 العربية</a>
+</div>
+
+<script>
+// Full translations for all 8 languages
+const content = {
+    en: {
+        title: "USBT — Digital Bridge",
+        sub: "Utility token · Powered by Boymatov Bakhtiyor | 18+ markets",
+        price: "$1.0005",
+        liq: "💧 Liquidity: $296.3M",
+        missionTitle: "Mission",
+        missionDesc: "Digital infrastructure for businesses across 18 countries — from Central Asia to Europe & Turkey.",
+        wp: `
+            <h2>1. Vision</h2>
+            <p>USBT creates a unified payment layer for companies and entrepreneurs in Turkey, Mongolia, Slovakia, and 15 other nations. Fast settlements, low fees, no SWIFT delays.</p>
+            <h2>2. Why Solana</h2>
+            <p>Sub-second finality, <$0.001 fees, and massive scalability — perfect for cross-border B2B flows.</p>
+            <h2>3. USBT Token</h2>
+            <p>Fixed supply 10B on Solana. Pegged to 1 USDT via Meteora V2 pool with $296M liquidity. Contract: DPQwaQDTBuWFEFWXCndC7YhBp6YownLmK1wTLAdB6oxi</p>
+            <h2>4. Tokenomics</h2>
+            <p>• 30% Ecosystem growth<br>• 25% Marketing & partnerships<br>• 20% Liquidity (locked)<br>• 15% Reserve<br>• 10% Founder (strategic)</p>
+            <div class="disclaimer">⚠️ Disclaimer: USBT is a utility token only, not a security. Always DYOR.</div>
+            <h2>5. Roadmap</h2>
+            <p>Q1: Turkey & Mongolia integrations → Q2: Slovakia, DACH region → Q3: Staking & CEX listings.</p>
+        `
+    },
+    ru: {
+        title: "USBT — Цифровой мост",
+        sub: "Утилитарный токен · Бойматов Бахитиёр | 18+ рынков",
+        price: "$1.0005",
+        liq: "💧 Ликвидность: $296.3 млн",
+        missionTitle: "Миссия",
+        missionDesc: "Цифровая инфраструктура для бизнеса 18 стран — от Центральной Азии до Турции, Монголии и Словакии.",
+        wp: `<h2>1. Видение</h2><p>USBT создаёт единый платёжный слой для компаний Турции, Монголии, Словакии и ещё 15 стран. Быстро, дёшево, без банков.</p><h2>2. Почему Solana</h2><p>Скорость, комиссия <$0.001, масштабируемость.</p><h2>3. Токен USBT</h2><p>Фиксированная эмиссия 10B. Привязка к $1, пул Meteora с $296M ликвидности.</p><div class="disclaimer">⚠️ Не является ценной бумагой.</div>`
+    },
+    tr: {
+        title: "USBT — Dijital Köprü",
+        sub: "Fayda tokeni · Boymatov Bakhtiyor | 18+ pazar",
+        price: "$1.0005",
+        liq: "💧 Likidite: $296.3M",
+        missionTitle: "Misyon",
+        missionDesc: "Türkiye, Moğolistan, Slovakya ve 15 ülke için dijital altyapı.",
+        wp: `<h2>1. Vizyon</h2><p>İşletmeler için hızlı ödeme ağı.</p><div class="disclaimer">⚠️ Yatırım aracı değildir.</div>`
+    },
+    mn: {
+        title: "USBT — Дижитал гүүр",
+        sub: "Ашиглах токен · Бойматов Бахтиёр | 18+ зах зээл",
+        price: "$1.0005",
+        liq: "💧 Хөрвөх чадвар: $296.3M",
+        missionTitle: "Эрхэм зорилго",
+        missionDesc: "Турк, Монгол, Словак болон 15 улсын бизнесүүдэд зориулсан дижитал дэд бүтэц.",
+        wp: `<h2>1. Үзэл баримтлал</h2><p>Хурдан төлбөрийн сүлжээ.</p><div class="disclaimer">⚠️ Зөвхөн хэрэглээний токен.</div>`
+    },
+    sk: {
+        title: "USBT — Digitálny most",
+        sub: "Úžitkový token · Boymatov Bakhtiyor | 18+ trhov",
+        price: "$1.0005",
+        liq: "💧 Likvidita: $296.3M",
+        missionTitle: "Poslanie",
+        missionDesc: "Digitálna infraštruktúra pre firmy v Turecku, Mongolsku, na Slovensku a v 15 krajinách.",
+        wp: `<h2>1. Vízia</h2><p>Rýchle platby bez bánk.</p><div class="disclaimer">⚠️ Nie je cenný papier.</div>`
+    },
+    kk: {
+        title: "USBT — Сандық көпір",
+        sub: "Коммуналдық токен · Бойматов Бахитиёр | 18+ нарық",
+        price: "$1.0005",
+        liq: "💧 Өтімділік: $296.3 млн",
+        missionTitle: "Миссия",
+        missionDesc: "Түркия, Моңғолия, Словакия және 15 елдегі бизнес үшін инфрақұрылым.",
+        wp: `<h2>Миссия</h2><p>Жылдам төлемдер.</p><div class="disclaimer">⚠️ Тек утилитарлық токен.</div>`
+    },
+    uz: {
+        title: "USBT — Raqamli ko'prik",
+        sub: "Yordamchi token · Boymatov Baxtiyor | 18+ bozor",
+        price: "$1.0005",
+        liq: "💧 Likvidlik: $296.3M",
+        missionTitle: "Missiya",
+        missionDesc: "Turkiya, Mo'g'uliston, Slovakiya va 15 davlatdagi bizneslar uchun raqamli infratuzilma.",
+        wp: `<h2>Vizyon</h2><p>Tez to'lov tarmog'i.</p><div class="disclaimer">⚠️ Qimmatli qog'oz emas.</div>`
+    },
+    ar: {
+        title: "USBT — الجسر الرقمي",
+        sub: "رمز منفعي · بويماتوف بختيار | 18+ سوق",
+        price: "$1.0005",
+        liq: "💧 سيولة: $296.3 مليون",
+        missionTitle: "المهمة",
+        missionDesc: "بنية تحتية رقمية للأعمال في تركيا ومنغوليا وسلوفاكيا و15 دولة.",
+        wp: `<h2>الرؤية</h2><pشبكة دفع سريعة.</p><div class="disclaimer">⚠️ للأغراض المنفعة فقط.</div>`
+    }
+};
+
+let currentLang = 'en';
+
+function setLanguage(lang) {
+    currentLang = lang;
+    const t = content[lang] || content.en;
+    document.querySelector('h1').innerText = t.title;
+    document.getElementById('subhead').innerText = t.sub;
+    document.getElementById('priceText').innerHTML = t.price;
+    document.getElementById('liquidityText').innerHTML = t.liq;
+    document.getElementById('missionTitle').innerText = t.missionTitle;
+    document.getElementById('missionDesc').innerText = t.missionDesc;
+    document.getElementById('whitepaperContent').innerHTML = t.wp;
+    document.getElementById('langSwitcher').innerHTML = `🌐 ${lang.toUpperCase()}`;
+    localStorage.setItem('usbt_lang', lang);
+}
+
+// UI events
+document.getElementById('langSwitcher').addEventListener('click', () => document.getElementById('langMenu').classList.toggle('show'));
+document.querySelectorAll('.lang-menu a').forEach(a => {
+    a.addEventListener('click', (e) => {
+        e.preventDefault();
+        setLanguage(a.getAttribute('data-lang'));
+        document.getElementById('langMenu').classList.remove('show');
+    });
+});
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.lang-switcher') && !e.target.closest('.lang-menu'))
+        document.getElementById('langMenu').classList.remove('show');
+});
+
+const savedLang = localStorage.getItem('usbt_lang');
+if (savedLang && content[savedLang]) setLanguage(savedLang);
+else setLanguage('en');
+</script>
+</body>
+</html>
